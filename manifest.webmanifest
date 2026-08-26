@@ -1,0 +1,14 @@
+{
+  "name": "Poker Coach",
+  "short_name": "Poker Coach",
+  "description": "Персональный учебный помощник для разбора покерных раздач.",
+  "lang": "ru",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#071f19",
+  "theme_color": "#071f19",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

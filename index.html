@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#071f19">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Poker Coach">
+  <meta name="description" content="Персональный учебный помощник для разбора раздач в техасском холдеме.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Poker Coach</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к раздаче</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">♠</span> Poker Coach</div>
+    <button id="sound-test" class="icon-button" type="button" aria-label="Проверить звук в очках">◖))</button>
+  </header>
+
+  <main id="main" class="shell">
+    <section class="hero reveal">
+      <p class="eyebrow">Учебная раздача · локально</p>
+      <h1>Решение через<br><em>математику.</em></h1>
+      <p class="hero-copy">Выбери карты или продиктуй их. Ответ прозвучит через активный аудиовыход iPhone — в том числе Ray‑Ban Meta.</p>
+    </section>
+
+    <section class="panel voice-panel reveal" aria-labelledby="voice-title">
+      <div class="panel-heading">
+        <div>
+          <p class="section-tag">01 · Голос</p>
+          <h2 id="voice-title">Продиктовать раздачу</h2>
+        </div>
+        <button id="voice-button" class="mic-button" type="button" aria-label="Начать голосовой ввод">●</button>
+      </div>
+      <p id="voice-status" class="muted">Например: «туз пик, король пик, двойка треф, банк 20, ставка 10»</p>
+      <label class="transcript-label" for="transcript-input">Распознанная или продиктованная фраза</label>
+      <textarea id="transcript-input" class="transcript-input" rows="3" placeholder="Коснись поля и нажми микрофон на клавиатуре iPhone"></textarea>
+      <button id="apply-voice" class="text-button" type="button">Заполнить из фразы →</button>
+    </section>
+
+    <section class="panel reveal" aria-labelledby="cards-title">
+      <div class="panel-heading">
+        <div>
+          <p class="section-tag">02 · Карты</p>
+          <h2 id="cards-title">Рука и борд</h2>
+        </div>
+        <button id="clear-board" class="text-button" type="button">Очистить борд</button>
+      </div>
+
+      <div class="card-row-label">Твои карты</div>
+      <div id="hole-cards" class="cards-row cards-row--hole"></div>
+
+      <div class="divider"></div>
+      <div class="card-row-label">Общие карты</div>
+      <div id="board-cards" class="cards-row cards-row--board"></div>
+    </section>
+
+    <section class="panel reveal" aria-labelledby="numbers-title">
+      <p class="section-tag">03 · Банк</p>
+      <h2 id="numbers-title">Цена решения</h2>
+      <div class="number-grid">
+        <label>Банк до колла
+          <input id="pot" inputmode="decimal" type="text" value="20" autocomplete="off">
+        </label>
+        <label>Сколько добавить
+          <input id="call" inputmode="decimal" type="text" value="10" autocomplete="off">
+        </label>
+      </div>
+    </section>
+
+    <button id="analyze" class="primary-button reveal" type="button">
+      <span>Разобрать раздачу</span><span aria-hidden="true">→</span>
+    </button>
+
+    <section id="result" class="result hidden" aria-live="polite"></section>
+
+    <section class="history-section reveal" aria-labelledby="history-title">
+      <div class="panel-heading">
+        <div>
+          <p class="section-tag">Последние</p>
+          <h2 id="history-title">История раздач</h2>
+        </div>
+        <button id="clear-history" class="text-button" type="button">Очистить</button>
+      </div>
+      <div id="history" class="history-list"></div>
+    </section>
+
+    <section class="install-note reveal">
+      <span class="install-icon">＋</span>
+      <div><strong>Установить на iPhone</strong><br>Safari → Поделиться → «На экран Домой»</div>
+    </section>
+  </main>
+
+  <footer>Расчёт против одной случайной руки. Учебная оценка, не GTO.</footer>
+  <script src="poker-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
