@@ -1,0 +1,39 @@
+name: Build unsigned iPhone IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "PokerCoach/**"
+      - "PokerCoach.xcodeproj/**"
+      - ".github/workflows/ios-ipa.yml"
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Expand iOS source
+        run: ditto -x -k PokerCoachSource.zip .
+      - name: Build device app without signing
+        run: |
+          xcodebuild \
+            -project PokerCoach.xcodeproj \
+            -scheme PokerCoach \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+      - name: Package IPA
+        run: |
+          mkdir Payload
+          cp -R DerivedData/Build/Products/Release-iphoneos/PokerCoach.app Payload/
+          zip -qry PokerCoach-unsigned.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PokerCoach-unsigned-ipa
+          path: PokerCoach-unsigned.ipa
