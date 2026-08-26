@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Expand iOS source
-        run: ditto -x -k PokerCoachSource.zip .
+        run: ditto -x -k PokerCoachSource2.zip .
       - name: Build device app without signing
         run: |
           xcodebuild \
